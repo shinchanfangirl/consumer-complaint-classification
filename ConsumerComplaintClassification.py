@@ -21,7 +21,7 @@ from sklearn.feature_extraction.text import CountVectorizer
 from sklearn import preprocessing, linear_model, metrics, datasets, multiclass, svm
 import seaborn as sns
 import numpy.random as nr
-
+import joblib
 
 # In[8]:
 
@@ -175,7 +175,12 @@ xtrain_tfidf = tfidf_vect.transform(train_x)
 #print(xtrain_tfidf)
 xvalid_tfidf = tfidf_vect.transform(valid_x)
 
+encoder = preprocessing.LabelEncoder()
 
+# Train and fit the encoder
+
+# Save the encoder object to a file named 'encoder.pkl'
+joblib.dump(encoder, 'encoder.pkl')
 # In[23]:
 
 
@@ -525,7 +530,7 @@ predictions = model.predict(xvalid_tfidf)
 # print(predictions[:15])
     
 plot_auc(y,colours) 
-import joblib
+
 
 filename = 'ConsumerComplaintClassification.sav'
 
